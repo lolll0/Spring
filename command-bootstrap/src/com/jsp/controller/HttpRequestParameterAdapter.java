@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HttpRequestParameterAdapter {
 	
-	public static Object execute(HttpServletRequest request, Class<?> className) throws Exception{
+	public static <T>T execute(HttpServletRequest request, Class<T> className) throws Exception{
 		// 의존성 확인 및 조립
 		Method[] methods = className.getMethods();
 		
 		// 인스턴스 생성
-		Object obj = className.newInstance();
+		T obj = className.newInstance();
 		
 		// setter확인
 		for(Method method : methods) {
