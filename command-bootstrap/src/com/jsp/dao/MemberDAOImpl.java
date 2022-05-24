@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.jsp.command.Criteria;
 import com.jsp.dto.MemberVO;
 
-public class MemberDaoImpl implements MemberDAO{
+public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public List<MemberVO> selectMemberList(SqlSession session) throws Exception {
