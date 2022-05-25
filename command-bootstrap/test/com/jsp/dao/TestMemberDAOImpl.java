@@ -19,7 +19,7 @@ public class TestMemberDAOImpl {
 	
 	private SqlSession session;
 	
-	private MemberDAO memberdao = new MemberDaoImpl();
+	private MemberDAO memberdao = new MemberDAOImpl();
 	
 	@Before
 	public void init()throws Exception{
