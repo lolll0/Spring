@@ -19,8 +19,8 @@ import com.jsp.exception.NotMultipartFormDataException;
 
 public class MultipartHttpServletRequestParser {
 	
-	private Map<String, List<String>> paramString = new HashMap<String, List<String>>();
-	private Map<String, List<FileItem>> paramFile = new HashMap<String, List<FileItem>>();
+	private Map<String, List<String>> paramString = new HashMap<String, List<String>>(); // text를 저장한다.
+	private Map<String, List<FileItem>> paramFile = new HashMap<String, List<FileItem>>(); // 파일을 저장한다.
 	
 	public MultipartHttpServletRequestParser(HttpServletRequest request, int memory_threshold, int max_file_size, int max_request_size )throws NotMultipartFormDataException, UnsupportedEncodingException, FileUploadException {
 		
