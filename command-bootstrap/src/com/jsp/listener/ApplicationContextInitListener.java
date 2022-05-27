@@ -24,7 +24,9 @@ public class ApplicationContextInitListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent ctxEvent)  { 
        
+    	// 서블릿 컨테이너와 통신을 하기 위함 -> ServletContext
        ServletContext ctx = ctxEvent.getServletContext();
+       // contextConfigLocation -> 스플링 프레임워크가 동작하기 위한 설정파일의 위치를 알려주는 파라미터
        String beanConfigXml = ctx.getInitParameter("contextConfigLocation");
 
       if (beanConfigXml == null)

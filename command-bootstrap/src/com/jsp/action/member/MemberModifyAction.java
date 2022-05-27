@@ -64,8 +64,9 @@ public class MemberModifyAction implements Action {
 		if(uploadPicture!=null && !uploadPicture.isEmpty()) { //사진 변경
 			//저장경로
 			String uploadPath = GetUploadPath.getUploadPath("member.picture.upload");
+			// 왜쓰는지 모름 안 써도 실행됨
 			File file = new File(uploadPath);
-						
+			
 			//기존 사진이미지 삭제
 			String oldPicture = memberTarget.getPicture();
 			File deleteFile = new File(uploadPath,oldPicture);
