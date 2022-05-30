@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
-    
 
-<%@ include file = "/WEB-INF/include/header.jsp" %>
-
+<%-- <%@ include file="/WEB-INF/include/header.jsp" %> --%>
 
   <!-- Content Wrapper. Contains page content -->
   <div>
@@ -115,77 +112,76 @@
   </section>
     <!-- /.content -->
   </div>
-<script type="text/javascript">
-window.onload = function(){
-	MemberPictureThumb("<%=request.getContextPath()%>");
-}
-</script>
+  
   <script>
-  function changePicture_go(){
-      //alert("file change");
-      
-      var form = $('form[role="form"]');
-      var picture = form.find('[name=picture]')[0];
-      
-      var inputFileName = $('input[id="inputFileName"]').val();
-      $('input[name="oldPicture"]').val(inputFileName);
-      
-      //이미지 확장자 jpg 확인
-      var fileFormat = picture.value.substr(picture.value.lastIndexOf(".")+1).toUpperCase();
-      if(!(fileFormat=="JPG" || fileFormat=="JPEG")){
-            alert("이미지는 jpg/jpeg 형식만 가능합니다.");
-            picture.value="";      
-            return;
-      } 
-
-      //이미지 파일 용량 체크
-      if(picture.files[0].size>1024*1024*1){
-         alert("사진 용량은 1MB 이하만 가능합니다.");
-         picture.value="";
-         return;
-      };
-      
-      //업로드 확인변수 초기화(사진변경)
-      form.find('[name = "checkUpload"]').val(0);
-      document.getElementById('inputFileName').value = picture.files[0].name;
-//      $('#inputFileName').val(picture.files[0].name);
-
-
-      if(picture.files&&picture.files[0]){
-         var reader = new FileReader();
-         
-         reader.onload = function(e){
-            // 이미지 미리보기
-            $('div#pictureView').css({
-               'background-image':'url('+e.target.result +')',   
-               'background-position':'center',   
-               'background-size':'contain',   
-               'background-repeat':'no-repeat'   
-            });
-         }
-         reader.readAsDataURL(picture.files[0]);
-      }
-      
-      //이미지 변경확인
-      $('input[name="uploadPicture"]').val(picture.files[0].name);
-      
-      
-  }
-</script>
-<script type="text/javascript">
-function modify_go(){
-	
-	var form = $('form[role="form"]');
-	form.attr({
-		"method" : "post",
-		"action" : "modify.do"
-	})
-	form.submit();
-}
-</script>
+    window.onload=function(){
+	   MemberPictureThumb('<%=request.getContextPath()%>');
+	}
+  </script>
+  
+  <script>
+ 	 function changePicture_go(){
+ 		//alert("file change");
+ 		
+ 		var picture = $('input#inputFile')[0];
+ 		
+ 		var fileFormat = picture.value.substr(picture.value.lastIndexOf(".")+1).toUpperCase();
+ 		
+ 		//이미지 확장자 jpg 확인
+		if(!(fileFormat=="JPG" || fileFormat=="JPEG")){
+			alert("이미지는 jpg 형식만 가능합니다.");
+			return;
+		} 
+		//이미지 파일 용량 체크
+		if(picture.files[0].size>1024*1024*1){
+			alert("사진 용량은 1MB 이하만 가능합니다.");
+			return;
+		};
+		
+		document.getElementById('inputFileName').value=picture.files[0].name;
+		
+		if (picture.files && picture.files[0]) {
+ 			var reader = new FileReader();
+			 
+			 reader.onload = function (e) {
+		        	//이미지 미리보기	        	
+		        	$('div#pictureView')
+		        	.css({'background-image':'url('+e.target.result+')',
+						  'background-position':'center',
+						  'background-size':'cover',
+						  'background-repeat':'no-repeat'
+		        		});
+		        }
+		        
+		       reader.readAsDataURL(picture.files[0]);
+		}
+		
+		// 이미지 변경 확인
+		$('input[name="uploadPicture"]').val(picture.files[0].name);
+ 	 }
+ 	 
+ 	function modify_go(){
+  		//alert("modify btn click");
+  		var form=$('form[role="form"]');
+  		//form.attr("action","modify.do");
+  		form.submit();
+  	}
+ 	 
+  </script>
+  
+<%-- <%@ include file="/WEB-INF/include/footer.jsp" %> --%>
 
 
-<%@ include file = "/WEB-INF/include/footer.jsp" %>
 
- 
+
+
+
+
+
+
+
+
+
+
+
 

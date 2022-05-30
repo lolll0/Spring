@@ -11,8 +11,8 @@
 <c:set var="cri" value="${dataMap.pageMaker.cri }" />
 <c:set var="memberList" value="${dataMap.memberList }" />
 
+<%-- <%@ include file="/WEB-INF/include/header.jsp" %> --%>
 
-<%@ include file="/WEB-INF/include/header.jsp" %>
 <div class="wrapper">
   <div >
 	 <!-- Main content -->
@@ -95,17 +95,13 @@
 		     						
 		     				
 		     					 <tr  onclick="OpenWindow('detail.do?id=${member.id}','회원상세',700,800);" style="cursor:pointer;">
-		            		  	   	<td style="margin:0;padding:0;padding-top:5;">
-		            		  	   		<span class="manPicture" data-id="${member.id }" style="display:block;width:40px;height:40px;margin:0 auto;"></span>
-		            		  	   	</td>
+		            		  	   	<td style="margin:0;padding:0;padding-top:5px;"><span class="manPicture" data-id="${member.id }" style="display:block;width:40px;height:40px;margin:0 auto;"></span></td>
 		            		  	   	<td>${member.id }</td>
 				              		<td>${member.pwd }</td>
 				              		<td>${member.name }
 				              		<td>${member.email }</td>
 		            		  	   	<td>${member.phone.replace('-','')  }</td>
-		            		  	   	<td>
-		            		  	   		<fmt:formatDate value="${member.regdate }" pattern="yyyy-MM-dd"/>
-		            		  	   	</td>
+		            		  	   	<td><fmt:formatDate value="${member.regDate }" pattern="yyyy-MM-dd"/></td>
 		            		  	  </tr>	
 		     					
 		     				</c:forEach>
@@ -190,21 +186,34 @@
 		}).submit();
 		
 	}
-	
   </script>
+  
   
 <script>
 
-window.onload = function(){
-	MemberPictureThumb("<%=request.getContextPath()%>");
+window.onload=function(){
+	MemberPictureThumb('<%=request.getContextPath()%>');
 }
-</script>  
-
-<%@ include file="/WEB-INF/include/footer.jsp" %>
-
+</script>
+  
 
 
-
+<%-- <%@ include file="/WEB-INF/include/footer.jsp" %> --%>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

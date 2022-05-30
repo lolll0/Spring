@@ -29,6 +29,11 @@
 		<property name="memberDAO"  ref-value="searchMemberDAO"/>     
 	</bean>
 	
-	      
+	<bean id="loginSearchMemberService" class="com.jsp.service.LoginSearchMemberServiceImpl">
+		<property name="memberDAO" ref-value="searchMemberDAO"/>
+		<property name="searchMemberDAO" ref-value="searchMemberDAO"/>
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory"/>
+		<property name="sqlSessionFactoryForLogin" ref-value="sqlSessionFactory"/>
+	</bean>      
 
 </beans>

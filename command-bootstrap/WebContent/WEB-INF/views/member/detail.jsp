@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<%@ include file = "/WEB-INF/include/header.jsp" %>
+
+<%-- <%@ include file="/WEB-INF/include/header.jsp" %> --%>
 
 <div class="wrapper">
   <div >
@@ -46,10 +42,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</div>
 					<br />
 	                <div class="form-group row" >
-	                  <label for="inputEmail3" class="col-sm-3 control-label text-right">아이디 </label>
+	                  <label for="inputEmail3" class="col-sm-3 control-label text-right">아이디</label>
 	
 	                  <div class="col-sm-9">
-	                    <input name="id" type="text" class="form-control" id="inputEmail3"  value="${member.id}" readonly>
+	                    <input name="id" type="text" class="form-control" id="inputEmail3"  value="${member.id }" readonly>
 	                  </div>
 	                </div>	               
 	                <div class="form-group row">
@@ -76,20 +72,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		          <div class="card-footer" style="padding:5px 0;" >
 		          		<div class="row">
 			          		<div class="col-sm-3 text-center">
-			          			<button type="button" onclick="location.href = '<%=request.getContextPath() %>/member/modifyForm.do?id=${member.id}'" id="modifyBtn" class="btn btn-warning ">수 정</button>
+			          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-warning ">수 정</button>
 			          		</div>
 		          		
 			          		<div class="col-sm-3 text-center">
-			          			<button type="button" onclick="location.href = '<%=request.getContextPath() %>/member/remove.do?id=${member.id }'" id="deleteBtn" class="btn btn-danger" >삭 제</button>
+			          			<button type="button" onclick="location.href='remove.do?id=${member.id}';" id="deleteBtn" class="btn btn-danger" >삭 제</button>
 			          		</div>
 		          			
 			          		<div class="col-sm-3 text-center">
-			          			<c:if test="${member.enabled eq 1 }">
-			          				<button type="button" onclick="" id="stopBtn" class="btn btn-info" >비활성</button>
-			          			</c:if>
-			          			<c:if test="${member.enabled eq 0 }">
-			          				<button type="button" onclick="" id="activeBtn" class="btn btn-info" >활&nbsp;&nbsp;성</button>
-			          			</c:if>
+			          		<c:if test="${member.enabled eq  1}">
+			          			<button type="button" onclick="" id="stopBtn" class="btn btn-info" >비활성</button>
+			          		</c:if>
+			          		<c:if test="${member.enabled eq 0 }">
+			          			<button type="button" onclick="" id="activeBtn" class="btn btn-info" >활&nbsp;&nbsp;성</button>
+			          		</c:if>
 			          		</div>
 			          		<div class="col-sm-3 text-center">
 			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
@@ -102,12 +98,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
 </div>
-<script type="text/javascript">
 
-window.onload = function(){
-	MemberPictureThumb("<%=request.getContextPath()%>");
+  
+<script>
+
+window.onload=function(){
+	MemberPictureThumb('<%=request.getContextPath()%>');
 }
 </script>
-<%@ include file = "/WEB-INF/include/footer.jsp" %>
+  
+
+<%-- <%@ include file="/WEB-INF/include/footer.jsp" %> --%>
