@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<title>공지 등록</title>
+<title>글등록</title>
 
 <body>
  <!-- Main content -->
@@ -14,13 +14,13 @@
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>공지등록</h1>  				
+	  				<h1>글등록</h1>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
 			        <li class="breadcrumb-item">
 			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>공지사항
+				        	<i class="fa fa-dashboard"></i>자유게시판
 				        </a>
 			        </li>
 			        <li class="breadcrumb-item active">
@@ -38,7 +38,7 @@
 			<div class="col-md-9" style="max-width:960px;">
 				<div class="card card-outline card-info">
 					<div class="card-header">
-						<h3 class="card-title p-1">공지등록</h3>
+						<h3 class="card-title p-1">글등록</h3>
 						<div class ="card-tools">
 							<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등 록</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;

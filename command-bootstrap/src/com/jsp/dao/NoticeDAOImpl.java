@@ -17,7 +17,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public List<NoticeVO> selectSearchNoticeList(SqlSession session, Criteria cri) throws SQLException {
 				
 		int startRow=cri.getStartRowNum();
-		int endRow=cri.getPerPageNum();		
+		int endRow=startRow + cri.getPerPageNum()-1;		
 		
 		SearchCriteria searchCri = (SearchCriteria)cri;
 		
