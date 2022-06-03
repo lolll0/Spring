@@ -6,21 +6,21 @@
 <script type="text/x-handlebars-template"  id="reply-list-template" >
 {{#each .}}
 <div class="replyLi" >
-   <div class="user-block">
-      <img src="<%=request.getContextPath()%>/member/getPicture.do?id={{replyer}}" class="img-circle img-bordered-sm"/>
-    </div>   
-   <div class="timeline-item" >
-        <span class="time">
-          <i class="fa fa-clock"></i>{{prettifyDate regdate}}
-          <a class="btn btn-primary btn-xs {{rno}}-a" id="modifyReplyBtn" data-rno={{rno}}
-            onclick="replyModifyModal_go('{{rno}}');"            
-            style="display:{{VisibleByLoginCheck replyer}};"
-             data-replyer={{replyer}} data-toggle="modal" data-target="#modifyModal">Modify</a>
-        </span>
-   
-        <h3 class="timeline-header"><strong style="display:none;">{{rno}}</strong>{{replyer}}</h3>
-        <div class="timeline-body" id="{{rno}}-replytext">{{replytext}} </div>
-   </div>
+	<div class="user-block">
+		<img src="<%=request.getContextPath()%>/member/getPicture.do?id={{replyer}}" class="img-circle img-bordered-sm"/>
+    </div>	
+	<div class="timeline-item" >
+  		<span class="time">
+    		<i class="fa fa-clock"></i>{{prettifyDate regdate}}
+	 		<a class="btn btn-primary btn-xs {{rno}}-a" id="modifyReplyBtn" data-rno={{rno}}
+				onclick="replyModifyModal_go('{{rno}}');"				
+				style="display:{{VisibleByLoginCheck replyer}};"
+	    		data-replyer={{replyer}} data-toggle="modal" data-target="#modifyModal">Modify</a>
+  		</span>
+	
+  		<h3 class="timeline-header"><strong style="display:none;">{{rno}}</strong>{{replyer}}</h3>
+  		<div class="timeline-body" id="{{rno}}-replytext">{{replytext}} </div>
+	</div>
 </div>
 
 {{/each}}
@@ -28,74 +28,77 @@
 
 <script type="text/x-handlebars-template"  id="reply-pagination-template" >
 <li class="paginate_button page-item">
-   <a href="1" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-      <i class='fas fa-angle-double-left'></i>
-   </a>
+	<a href="1" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-double-left'></i>
+	</a>
 </li>
 <li class="paginate_button page-item">
-   <a href="{{#if prev}}{{prevPageNum}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-      <i class='fas fa-angle-left'></i>
-   </a>
+	<a href="{{#if prev}}{{prevPageNum}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-left'></i>
+	</a>
 </li>
 {{#each pageNum}}
 <li class="paginate_button page-item {{signActive this}} ">
-   <a href="javascript:getPage('<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page={{this}}',{{this}});" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-      {{this}}
-   </a>
+	<a href="javascript:getPage('<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page={{this}}',{{this}});" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		{{this}}
+	</a>
 </li>
 {{/each}}
 
 <li class="paginate_button page-item ">
-   <a href="{{#if next}}{{nextPageNum}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-      <i class='fas fa-angle-right'></i>
-   </a>
+	<a href="{{#if next}}{{nextPageNum}}{{/if}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-right'></i>
+	</a>
 </li>
 <li class="paginate_button page-item">
-   <a href="{{realEndPage}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
-      <i class='fas fa-angle-double-right'></i>
-   </a>
-</li>   
+	<a href="{{realEndPage}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+		<i class='fas fa-angle-double-right'></i>
+	</a>
+</li>	
 </script>
 
 
 <script>
-var replyPage = 1;
+var replyPage=1;
 
-window.onload = function(){
-   getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage,1);
+window.onload=function(){
+	getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
 }
-function getPage(pageInfo,page) {
-	if(page)replyPage=page;
-   $.getJSON(pageInfo, function(data){
-      printData(data.replyList, $('#repliesDiv'), $('#reply-list-template'));
-  	  printPagination(data.pageMaker,$('ul#pagination'),$('#reply-pagination-template'));
-   });
+function getPage(pageInfo,page){
+	if(page) replyPage = page;
+	$.getJSON(pageInfo,function(data){	
+		printData(data.replyList,$('#repliesDiv'),$('#reply-list-template'));
+		printPagination(data.pageMaker,$('ul#pagination'),$('#reply-pagination-template'));
+	});
 }
-function printData(replyArr, target, templateObject) {
-   var template = Handlebars.compile(templateObject.html());
-   var html = template(replyArr);
-   $('.replyLi').remove();
-   target.after(html);
+
+function printData(replyArr,target,templateObject){
+	var template=Handlebars.compile(templateObject.html());
+	var html = template(replyArr);	
+	$('.replyLi').remove();
+	target.after(html);
 }
+
 Handlebars.registerHelper({
-   "prettifyDate":function(timeValue){
-      var dateObj = new Date(timeValue);
-      var year = dateObj.getFullYear();
-      var month = dateObj.getMonth()+1;
-      var date = dateObj.getDate();
-      return year + "/" + month + "/" + date;
-   },
-   "VisibleByLoginCheck":function(replyer){
-      var result = "none";
-      if(replyer == "${loginUser.id}") result = "visible";
-      return result;
-   },
-   "signActive":function(pageNum){
-      if(pageNum == replyPage) return 'active';
-   }
+	"prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록
+		var dateObj=new Date(timeValue);
+		var year=dateObj.getFullYear();
+		var month=dateObj.getMonth()+1;
+		var date=dateObj.getDate();
+		return year+"/"+month+"/"+date;
+	},
+	"VisibleByLoginCheck":function(replyer){
+		var result="none";		
+		if(replyer == "${loginUser.id}") result="visible";		
+		return result;						  
+	},
+	"signActive":function(pageNum){
+		if(pageNum == replyPage) return 'active';
+	}
 });
 
-/* paginagion */
+
+/* pagination */
 function printPagination(pageMaker,target,templateObject){
 	var pageNumArray = new Array(pageMaker.endPage-pageMaker.startPage+1);
 	for(var i=0;i<pageMaker.endPage-pageMaker.startPage+1;i++){
@@ -111,33 +114,35 @@ function printPagination(pageMaker,target,templateObject){
 }
 
 function replyRegist_go(){
-	var replytext = $('#newReplyText').val();
-	//alert(replytext);
+	var replytext=$('#newReplyText').val();
+	
 	
 	var data={
 			"bno":"${board.bno}",
 			"replyer":"${loginUser.id}",
-			"replytext":replytext
+			"replytext":replytext	
 	}
 	
 	$.ajax({
 		url:"<%=request.getContextPath()%>/reply/regist.do",
 		type:"post",
-		data:JSON.stringify(data),
+		data:JSON.stringify(data),	
 		contentType:'application/json',
 		success:function(data){
-			alert('댓글이 등록되었습니다. \n마지막페이지로 이동합니다.');
-			replyPage = data;
-			getPage("<%=request.getContextPath()%>/reply/list.do?bno="+${board.bno}+"&page="+data);
-			$('#newReplyText').val("");
+			//console.log(data);
+			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
+			replyPage=data; //페이지이동
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno="+${board.bno}+"&page="+data); //리스트 출력
+			$('#newReplyText').val("");	
 		},
-		error:function(){
-			alert("댓글이 등록을 실패하였습니다.");
+		error:function(error){
+			AjaxErrorSecurityRedirectHandler(error.status);	
 		}
 	});
+	
 }
 
-// 댓글 수정 modal
+//댓글 수정 modal
 function replyModifyModal_go(rno){
 	//alert(rno);
 	//alert($('div#'+rno+'-replytext').text());
@@ -145,7 +150,7 @@ function replyModifyModal_go(rno){
 	$('div#modifyModal div.modal-header h4.modal-title').text(rno);
 }
 
-// 댓글 수정
+//댓글 수정.
 function replyModify_go(){
 	//alert("modify btn");
 	var rno=$('div#modifyModal h4.modal-title').text();
@@ -162,11 +167,36 @@ function replyModify_go(){
 		data:JSON.stringify(sendData),
 		contentType:"application/json",
 		success:function(result){
-			alert("수정되었습니다.");
-			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
+			alert("수정되었습니다.");			
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="
+					+replyPage);
 		},
-		error:function(){
-			alert("수정 실패했습니다.");
+		error:function(error){
+			//alert('수정 실패했습니다.');
+			AjaxErrorSecurityRedirectHandler(error.status);	
+		},
+		complete:function(){
+			$('#modifyModal').modal('hide');
+		}
+	});
+}
+
+function replyRemove_go(){
+	//alert("delete btn");
+	
+	var rno=$('.modal-title').text();
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/reply/remove.do?rno="+rno+"&page="+replyPage+"&bno=${board.bno}",
+		type:"get",
+		success:function(page){
+			alert("삭제되었습니다.");
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+page);
+			replyPage=page;
+		},
+		error:function(error){
+			//alert('삭제 실패했습니다.');
+			AjaxErrorSecurityRedirectHandler(error.status);	
 		},
 		complete:function(){
 			$('#modifyModal').modal('hide');
@@ -174,9 +204,6 @@ function replyModify_go(){
 	});
 }
 </script> 
-
-
-
 
 
 

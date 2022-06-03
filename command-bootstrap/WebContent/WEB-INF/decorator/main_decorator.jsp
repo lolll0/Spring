@@ -49,6 +49,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script src="<%=request.getContextPath() %>/resources/js/common.js" ></script>
 
+
+
 <script>
 	$('div.wrapper').css({
 		"max-width":"1280px",
@@ -101,10 +103,18 @@ function goPage(url,mCode){
 function subMenu_go(mCode){
 	//alert(mCode);
 	if(mCode!="M000000"){	
-
-		$.getJSON("<%=request.getContextPath()%>/subMenu.do?mCode="+mCode,function(data){
-			printData(data,$('.subMenuList'),$('#subMenu-list-template'),'.subMenu');
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/subMenu.do?mCode="+mCode,
+			method:"get",			
+			success:function(data){
+				printData(data,$('.subMenuList'),$('#subMenu-list-template'),'.subMenu');
+			},
+			error:function(error){
+				AjaxErrorSecurityRedirectHandler(error.status);	
+			}
 		});
+		
 
 	}else{
 		$('.subMenuList').html("");	

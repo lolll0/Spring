@@ -28,7 +28,7 @@ public class MemberRegistAction implements Action {
 	      try {
 	    	  
 	      MemberRegistCommand command = HttpRequestParameterAdapter.execute(request, MemberRegistCommand.class);
-	      MemberVO member = command.tomemberVO();
+	      MemberVO member = command.toMemberVO();
 	      
 	      //처리
 	      memberService.regist(member);

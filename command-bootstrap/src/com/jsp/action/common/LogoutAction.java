@@ -10,10 +10,10 @@ public class LogoutAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "request:";
+		String url="redirect:";
 		
 		HttpSession session = request.getSession();
-		session.invalidate(); // 세션 삭제
+		session.invalidate();
 		
 		return url;
 	}

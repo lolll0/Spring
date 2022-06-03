@@ -4,6 +4,7 @@ import com.jsp.dto.NoticeVO;
 
 public class NoticeModifyCommand {
 	
+
 	private String nno;
 	private String title;
 	private String content;
@@ -34,17 +35,16 @@ public class NoticeModifyCommand {
 		this.writer = writer;
 	}
 	
-	public NoticeVO toNoticeVO() {
+	public NoticeVO toNoticeVO(){
 		NoticeVO notice = new NoticeVO();
 		
 		notice.setNno(Integer.parseInt(this.nno));
 		notice.setTitle(this.title);
 		notice.setContent(this.content);
-		notice.setWriter(this.writer);
+		notice.setWriter(this.writer);	
 		
 		return notice;
+		
 	}
-	
-	
 	
 }
