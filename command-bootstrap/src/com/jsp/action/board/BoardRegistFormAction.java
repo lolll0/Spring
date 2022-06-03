@@ -4,15 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jsp.action.Action;
-import com.jsp.service.BoardService;
 
-public class BoardRegistFormAction implements Action {
-	
+public class BoardRegistFormAction implements Action{
 
-	
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/board/regist";
+	public String process(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String url="/board/regist";
 		return url;
 	}
 
